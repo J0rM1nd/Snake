@@ -1,0 +1,392 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.21f1 (1b156197d683) revision 1774945'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'en' Physical Memory: 7880 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/DiscD/projects/Snake/Snake/Snake
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+51515
+Successfully changed project path to: C:/DiscD/projects/Snake/Snake/Snake
+C:/DiscD/projects/Snake/Snake/Snake
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [5044] Host "[IP] 192.168.0.3 [Port] 0 [Flags] 2 [Guid] 4214675264 [EditorId] 4214675264 [Version] 1048832 [Id] WindowsEditor(7,Splutbook) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [5044] Host "[IP] 192.168.0.3 [Port] 0 [Flags] 2 [Guid] 4214675264 [EditorId] 4214675264 [Version] 1048832 [Id] WindowsEditor(7,Splutbook) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 130.17 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.21f1 (1b156197d683)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/DiscD/projects/Snake/Snake/Snake/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) UHD Graphics (ID=0x8a56)
+    Vendor:   Intel
+    VRAM:     3940 MB
+    Driver:   27.20.100.9664
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56924
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.009660 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 237.38 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.959 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1960ms)
+		BeginReloadAssembly (354ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (3ms)
+		EndReloadAssembly (1379ms)
+			LoadAssemblies (348ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (314ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (62ms)
+			SetupLoadedEditorAssemblies (871ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (13ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (238ms)
+				BeforeProcessingInitializeOnLoad (4ms)
+				ProcessInitializeOnLoadAttributes (517ms)
+				ProcessInitializeOnLoadMethodAttributes (99ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004782 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\DiscD\projects\Snake\Snake\Snake\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\DiscD\projects\Snake\Snake\Snake\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.51 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.249 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3251ms)
+		BeginReloadAssembly (397ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (21ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (77ms)
+		EndReloadAssembly (2532ms)
+			LoadAssemblies (247ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (868ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (144ms)
+			SetupLoadedEditorAssemblies (1159ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (26ms)
+				SetLoadedEditorAssemblies (8ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (504ms)
+				ProcessInitializeOnLoadAttributes (550ms)
+				ProcessInitializeOnLoadMethodAttributes (61ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (14ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.14 seconds
+Refreshing native plugins compatible for Editor in 1.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3055 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 24 unused Assets / (113.5 KB). Loaded Objects now: 3515.
+Memory consumption went from 107.7 MB to 107.6 MB.
+Total: 18.042600 ms (FindLiveObjects: 0.559600 ms CreateObjectMapping: 0.404400 ms MarkObjects: 16.827400 ms  DeleteObjects: 0.247800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 6981.649050 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b93b72a5d81a3bded24ae2d56e8eb01e') in 0.056144 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 67.279016 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '734daa1aa5372eacef793b65eccfe2b0') in 0.007193 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 167.775970 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df557f7ac6b2ba9c0e105989fe5ea978') in 0.005171 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 52.594936 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b0b6a5150a25638dc2d31c17e3132a5') in 0.005477 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 53.116369 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a0a82a4391a499bfeb5e2ca78230558') in 0.007095 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.485438 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de688bfb97f44e06037d089edbc2e59f') in 0.006787 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 40.536546 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcaf666945c23ed130e9fc6b80a0b7ed') in 0.006221 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 127.639855 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b123bbbaabd54bf9e94bcb680ee1d2f') in 0.005336 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.741101 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84ddb086e0f62966ac69347ef7f06316') in 0.006830 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.073583 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f43787885b01078b39ae0925ab82e5c') in 0.005950 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.641748 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed5c2574411eb64ad5117a3cfebabcf2') in 0.004363 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 41.114018 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97665d3913badbfe5898be69a7847537') in 0.006696 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 30.137852 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c703c2515f96684d9868ed26ecd3f108') in 0.006159 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 36.110813 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab7d066b9ea2b4b4d1f3b55feb75d524') in 0.004444 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.039079 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4940f5bb8506b7908327aaa902e6b095') in 0.004770 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 34.073324 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f4f9bdc4a58222868c4ddca81d227e8') in 0.005555 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 67.526360 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35e760a96fbb5cdcef17fcd49e129bd2') in 0.005953 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 142.760422 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eeaad5de4a135822b9b5b18c8d6ee4fc') in 0.006809 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 29.518313 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '055a57915a0b79427d377a94e58a2195') in 0.005582 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 31.869084 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4b8b51a40a46329909793e0274b3674') in 0.005803 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 23.117264 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1badb9d8c2da55e35d9aaa402762016d') in 0.005646 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.667984 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8783edf4c716f21598a3d6ddb59ae4ed') in 0.004470 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 48.171453 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4e985318caf529b8636a435825572b6') in 0.005228 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2025.210077 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d89592287ba4ec9a8d7c41b04fc1452') in 0.006968 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 14.876112 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '087b34e673908a15fa68ae94b841b7aa') in 0.005789 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.737209 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a484f826bd9f00f5e7923927f9507910') in 0.005631 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 58.896343 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '066cc8faf9dc10565f671d79ef84bdce') in 0.005440 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 39.272424 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0b46bd7cc68c3978332008e30979512') in 0.008719 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2126.733636 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b6d6c8758e68d29dd4e7e5c38d7b7f9') in 0.004292 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 60.097127 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3145826a8c633eb872bcb4445a725db0') in 0.005835 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 57.738700 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb9c94e3085bc1afaac2286e3718926a') in 0.008171 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.950136 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9841b62dfa01e69f517fc10289deee14') in 0.007195 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.421731 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5d4c4a0355b4a6a556c8cc4e4ce52ce') in 0.005135 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 96.308404 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66714878f0236fdecb282528fd9aaaa4') in 0.007663 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 33.724366 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a163693660cd11d7905a563a3561dd99') in 0.006481 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 72.117679 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77a4835c2cbf564aefad88c804501772') in 0.008636 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 40.402224 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '257dd6d3ad8f1562e80da01588cfe7d6') in 0.007306 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 44.862829 seconds.
+  path: Assets/Snake2.cs
+  artifactKey: Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Snake2.cs using Guid(c3ec99a3c0b233348b3b70db230b95e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16eb39c506bb1175ba2a62edbe0f8dd0') in 0.009842 seconds 
