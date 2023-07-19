@@ -1,32 +1,36 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _bodyPrefab;
+    private GameObject _bodyPrefab_;
     [SerializeField]
-    private GameObject _headPrefab;
+    private GameObject _headPrefab_;
     [SerializeField]
-    private GameObject _foodPrefab;
-    [SerializeField]
-    private Material team10;
-    [SerializeField]
-    private Material team11;
-    [SerializeField]
-    private Material team20;
-    [SerializeField]
-    private Material team21;
+    private GameObject _foodPrefab_;
+
+    private float _timeAccelerationConst;
+    private float _timeAccelerationConst1;
+    private float _timeAccelerationTime;
+    private float _timeAccelerationCoefficient;
+    private float _timeAcceleration;
 
     private Map _map;
-    private List<Snake2> _snakes;
-    private List<GameObject> _food;
+    private List<Snake> _snakes;
+    private GameObject[,] _food;
+
+    private GameMode _gameMode;
+
+    public GameObject Food(Vector2Int pos) => _food[pos.x, pos.y];
+
+    public InputSettings[] InputSettings;
+
+    public bool StartGame;
 
     private float _foodTimer;
-    private List<float> _snakeTimers;
-    private List<List<int>> _grawthTickTimer;
 
     public float FoodSpawnRate { get; private set; }
 
@@ -37,27 +41,40 @@ public class World : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < _snakes.Count; i++)
+        if (!StartGame) return;
+        int l = _snakes.Count;
+        _timeAccelerationTime += Time.deltaTime;
+        if (_timeAccelerationTime > _timeAccelerationConst / _timeAccelerationCoefficient)
         {
-            _snakeTimers[i] += Time.deltaTime;
-            if (_snakeTimers[i] > 1 / _snakes[i].Speed)
+            _timeAcceleration *= _timeAccelerationConst1;
+            _timeAccelerationTime = 0f;
+        }
+        for (int i = 0; i < l; i++)
+        {
+            _snakes[i].TurnTimer -= Time.deltaTime;
+            if (_snakes[i].TurnTimer < 0)
             {
-                _snakeTimers[i] = 0;
+                _snakes[i].TurnTimer = 1 / _snakes[i].Speed / _timeAcceleration;
                 switch (_snakes[i].TryMoove().Item2)
                 {
                     case TileStatus.Empty:
-                        _snakes[i].Step(_snakes[i].Speed);
+                        _snakes[i].Step(_snakes[i].Speed * _timeAcceleration);
                         break;
                     case TileStatus.Food:
-                        _snakes[i].AddEatenFood( _snakes[i].TryMoove().Item1, 
-                            FoodByIdOrNull(_snakes[i].TryMoove().Item3) );
-                        _grawthTickTimer[i].Add(_snakes[i].Length);
-                        _snakes[i].Step(_snakes[i].Speed);
+                        _snakes[i].AddEatenFood(_snakes[i].TryMoove().Item1);
+                        _snakes[i].Step(_snakes[i].Speed * _timeAcceleration);
                         break;
                     case TileStatus.Body:
-                    case TileStatus.Head:
                     case TileStatus.Wall:
                         SnakeDie(_snakes[i].ID);
+                        i--;
+                        l--;
+                        break;
+                    case TileStatus.Head:
+                        SnakeDie(_snakes[i].TryMoove().Item3);
+                        SnakeDie(_snakes[i].ID);
+                        i--;
+                        l -= 2;
                         break;
                 }
             }
@@ -65,47 +82,57 @@ public class World : MonoBehaviour
         UpdateFood();
     }
 
-    public void Awake()//RABOTAYET, NE TROZH
+    public void SetSettingsAndStart(int playersCount, GameMode gameMode, int timeAcceleration, int startSpeed, Vector2Int mapSize, InputSettings[] inputSettings, Material mat)
     {
-        _food = new List<GameObject>();
-        FoodSpawnRate = 2;
+        _gameMode = gameMode;
+        GameObject _bodyPrefab = Instantiate(_bodyPrefab_);
+        GameObject _headPrefab = Instantiate(_headPrefab_);
+        GameObject _foodPrefab = Instantiate(_foodPrefab_);
+        InputSettings = inputSettings;
+        _timeAccelerationCoefficient = timeAcceleration;
+        FoodSpawnRate = 1;
         _foodTimer = 0;
-        MapSize = new(50, 50);
+        MapSize = new(mapSize.x, mapSize.y);
         _map = new(MapSize);
-        SnakesCount = 4;
-        _snakes = new List<Snake2>();
-        _grawthTickTimer = new();
-        _snakeTimers = new List<float>();
-        for (int i = 0; i < SnakesCount; i++)
-        {
-            _snakeTimers.Add(0);
-            _grawthTickTimer.Add(new List<int>());
-        }
-        Vector2Int[] poss = new Vector2Int[3];
-        int y;
-        List<Material> list = new List<Material> { team10, team20, team11, team21 };
+        _food = new GameObject[MapSize.x, MapSize.y];
+        _foodPrefab.transform.localScale /= MapScale;
+        _bodyPrefab.transform.localScale /= MapScale;
+        _headPrefab.transform.localScale /= MapScale;
+        SnakesCount = playersCount * 2;
+        _snakes = new List<Snake>();
         List<GameObject> prefabs;
-        y = 0;
-        for (int i = 0; i < SnakesCount / 2; i++)
+        Material[] materials = new Material[3];
+        materials[0] = new(mat); materials[1] = new(mat); materials[2] = new(mat);
+        for (int i = 0; i < playersCount; i++)
         {
+            materials[0] = new(mat); materials[1] = new(mat); materials[2] = new(mat);
+            materials[0].mainTexture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Materials/Teams/Team" + (i + 1) + "/Mat1.png");
+            materials[1].mainTexture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Materials/Teams/Team" + (i + 1) + "/Mat2.png");
+            materials[2].mainTexture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Materials/Teams/Team" + (i + 1) + "/Mat2S.png");
             prefabs = new List<GameObject> { Instantiate(_headPrefab) };
-            for (int j = 1; j < poss.Length; j++)
+            for (int j = 1; j < 3; j++)
                 prefabs.Add(Instantiate(_bodyPrefab));
-            y = 2 * i;
-            (poss[0], poss[1], poss[2]) = (new(2, y), new(1, y), new(0, y));
-            _snakes.Add(new(this, poss, prefabs.ToArray(), 2 * i, Direction2.Right,
-                _bodyPrefab, list[i * 2]));
+            var v = StartPositions(playersCount, 2 * i);
+            _snakes.Add(new(this, i, v.Item1, prefabs.ToArray(), 2 * i, v.Item2, _bodyPrefab, materials[0], materials[0]));
             prefabs = new List<GameObject> { Instantiate(_headPrefab) };
-            for (int j = 1; j < poss.Length; j++)
+            for (int j = 1; j < 3; j++)
                 prefabs.Add(Instantiate(_bodyPrefab));
-            y = MapSize.y - 1 - 2 * i;
-            (poss[0], poss[1], poss[2]) =
-                (new(MapSize.x - 3, y), new(MapSize.x - 2, y), new(MapSize.x - 1, y));
-            _snakes.Add(new(this, poss, prefabs.ToArray(), 2 * i + 1, Direction2.Left,
-                _bodyPrefab, list[i * 2 + 1]));
+            v = StartPositions(playersCount, 2 * i + 1);
+            _snakes.Add(new(this, i, v.Item1, prefabs.ToArray(), 2 * i + 1, v.Item2, _bodyPrefab, materials[1], materials[2]));
         }
+
         for (int i = 0; i < _snakes.Count; i++)
-            _snakes[i].Speed = 5f;
+            _snakes[i].Speed = startSpeed;
+        RescaleBounds();
+        StartGame = true;
+    }
+
+    public void Awake()
+    {
+        _timeAcceleration = 1f;
+        _timeAccelerationConst = 30f;
+        _timeAccelerationConst1 = 1.1f;
+        StartGame = false;
     }
 
 
@@ -130,20 +157,70 @@ public class World : MonoBehaviour
 
     public void SpawnFood(Vector2Int pos)
     {
-        _food.Add(Instantiate(_foodPrefab, Vector2To3(pos) + new Vector3(0f, 0.19f, 0f),
-                    Quaternion.identity));
-        _food.Last().GetComponent<Rigidbody>().angularVelocity = new(0f, 2f, 0f);
-        _food.Last().GetComponent<Food>().ID = _map.FoodNextId;
-        _map.Set(pos, _food.Last().GetComponent<Food>().ID, TileStatus.Food);
+        GameObject f = Instantiate(_foodPrefab_, Vector2To3(pos) + new Vector3(0f, 0.19f / MapScale, 0f), Quaternion.identity);
+        f.transform.localScale /= MapScale;
+        f.transform.position = new(f.transform.position.x, f.transform.position.y / MapScale, f.transform.position.z);
+        f.GetComponent<Rigidbody>().angularVelocity = new(0f, 0.5f * _snakes[0].Speed * _timeAcceleration, 0f);
+        _food[pos.x, pos.y] = f;
+        _map.Set(pos, 1, TileStatus.Food);
+    }
+
+    private (Vector2Int[], Direction2) StartPositions(int playersCount, int snakeNum)
+    {
+        Vector2Int[] res = new Vector2Int[3];
+        switch (playersCount)
+        {
+            case 2:
+                switch (snakeNum)
+                {
+                    case 0:
+                        res[0] = new(3, 2); res[1] = new(2, 2); res[2] = new(1, 2);
+                        return (res, Direction2.Right);
+                    case 1:
+                        res[0] = new(3, 4); res[1] = new(2, 4); res[2] = new(1, 4);
+                        return (res, Direction2.Right);
+                    case 2:
+                        res[0] = new(MapSize.x - 4, MapSize.y - 3); res[1] = new(MapSize.x - 3, MapSize.y - 3); res[2] = new(MapSize.x - 2, MapSize.y - 3);
+                        return (res, Direction2.Left);
+                    case 3:
+                        res[0] = new(MapSize.x - 4, MapSize.y - 5); res[1] = new(MapSize.x - 3, MapSize.y - 5); res[2] = new(MapSize.x - 2, MapSize.y - 5);
+                        return (res, Direction2.Left);
+                    default:
+                        throw new System.Exception();
+                }
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            default:
+                throw new System.Exception("Players count is out of range");
+        }
+        throw new System.Exception("Need code");
     }
 
 
     private void SnakeDie(int id)
     {
-        Snake2 s = _snakes[NumById(id)];
+        Snake s = _snakes[NumById(id)];
         s.Die();
         _snakes.Remove(s);
-        if (_snakes.Count == 0 )
+        if (_snakes.Count == 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -156,32 +233,69 @@ public class World : MonoBehaviour
         return -1;
     }
 
-    private GameObject FoodByIdOrNull(int id)
+    private void RescaleBounds()
     {
-        for (int i = 0; i < _food.Count; i++)
-            if (_food[i].GetComponent<Food>().ID == id)
-                return _food[i];
-        throw new System.Exception();
+        Vector3 c = Vector2To3(new(0, 0));
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            switch (gameObject.transform.GetChild(i).name)
+            {
+                case "BoundL":
+                    gameObject.transform.GetChild(i).transform.localScale = new Vector3(
+                        gameObject.transform.GetChild(i).transform.localScale.x / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.y / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.z);
+                    gameObject.transform.GetChild(i).transform.position = new Vector3(
+                        c.x,
+                        c.y,
+                        gameObject.transform.GetChild(i).transform.position.z);
+                    break;
+                case "BoundR":
+                    gameObject.transform.GetChild(i).transform.localScale = new Vector3(
+                        gameObject.transform.GetChild(i).transform.localScale.x / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.y / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.z);
+                    gameObject.transform.GetChild(i).transform.position = new Vector3(
+                        -c.x,
+                        c.y,
+                        gameObject.transform.GetChild(i).transform.position.z);
+                    break;
+                case "BoundB":
+                    gameObject.transform.GetChild(i).transform.localScale = new Vector3(
+                        gameObject.transform.GetChild(i).transform.localScale.x / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.y / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.z);
+                    gameObject.transform.GetChild(i).transform.position = new Vector3(
+                        gameObject.transform.GetChild(i).transform.position.x,
+                        c.y,
+                        c.z);
+                    break;
+                case "BoundT":
+                    gameObject.transform.GetChild(i).transform.localScale = new Vector3(
+                        gameObject.transform.GetChild(i).transform.localScale.x / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.y / MapScale,
+                        gameObject.transform.GetChild(i).transform.localScale.z);
+                    gameObject.transform.GetChild(i).transform.position = new Vector3(
+                        gameObject.transform.GetChild(i).transform.position.x,
+                        c.y,
+                        -c.z);
+                    break;
+            }
+        }
     }
 
-    private int? FoodNumByIdOrNull(int id)
+    public void RemooveFood(Vector2Int pos)
     {
-        for (int i = 0; i < _snakes.Count; i++)
-            if (_food[i].GetComponent<Food>().ID == id)
-                return i;
-        return null;
+        Destroy(Food(pos));
+        _food[pos.x, pos.y] = null;
     }
 
-    public void RemooveFood(GameObject food)
+    public int MapScale { get { return MapSize.x / 16; } }
+    public Vector3 Vector2To3(Vector2Int vect) => Vector2To3(new Vector3(vect.x, vect.y));
+    public Vector3 Vector2To3(Vector2 vect)
     {
-        _food.Remove(food);
-        Destroy(food);
-
+        float k = 5f / MapScale;
+        return new(2f * k * vect.x - 80f + k, k, 2f * k * vect.y - 45f + k);
     }
-
-
-    public Vector3 Vector2To3(Vector2Int vect) =>
-        new(vect.x - MapSize.x / 2, 0.5f, vect.y - MapSize.y / 2);
-    public Vector3 Velocity2To3(Vector2Int vect) =>
-        new(vect.x, 0, vect.y);
+    public Vector3 Velocity2To3(Vector2Int vect) => new(10f * vect.x / MapScale, 0, 10f * vect.y / MapScale);
 }

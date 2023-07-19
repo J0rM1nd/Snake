@@ -39,11 +39,25 @@ public class Map
         FoodNextId = 0;
         _tiles = new int[mapSize.x, mapSize.y];
         _tileStatuses = new TileStatus[mapSize.x, mapSize.y];
-        for (int i = 0; i < mapSize.x; i++)
-            for (int j = 0; j < mapSize.y; j++)
+        for (int i = 1; i < mapSize.x - 1; i++)
+            for (int j = 1; j < mapSize.y - 1; j++)
             {
                 _tiles[i, j] = -1;
                 _tileStatuses[i, j] = TileStatus.Empty;
             }
+        for (int j = 0; j < mapSize.y; j++)
+        {
+            _tiles[0, j] = -2;
+            _tileStatuses[0, j] = TileStatus.Wall;
+            _tiles[mapSize.x - 1, j] = -2;
+            _tileStatuses[mapSize.x - 1, j] = TileStatus.Wall;
+        }
+        for (int i = 0; i < mapSize.x; i++)
+        {
+            _tiles[i, 0] = -2;
+            _tileStatuses[i, 0] = TileStatus.Wall;
+            _tiles[i, mapSize.y - 1] = -2;
+            _tileStatuses[i, mapSize.y - 1] = TileStatus.Wall;
+        }
     }
 }

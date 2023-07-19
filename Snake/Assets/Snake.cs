@@ -1,93 +1,108 @@
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
 public class Snake
 {
-    private Vector2Int _head;
-    private int _tail;
-    private List<Vector2Int> _body;
-    private Vector2Int _direction;
-    private Vector2Int _lastDirection;
+    public GameObject BodyPrefab;
+    private Material _material;
+
+    private List<(Vector2Int, GameObject)> _eatenFood;
+
+    public int SnakeId;
+
+    public int PlayerId;
+
+    private World _world;
+    private Head _head;
+    private Segment _tail;
+
+    public float TurnTimer { get; set; }
+
+    public float Speed { get; set; }
+    public int Length { get; private set; }
+    public int ID { get; private set; }
+
+    public void UpdateDirection(Direction2 direction) => _head.Direction = direction;
 
 
-    public List<int> TargetIDs;
-    public int ID;
 
-    public List<Vector2Int> Body { get => _body; }
-    public Vector2Int Head { get => _head; }
+    public (Vector2Int, TileStatus, int) TryMoove() => _head.TryMoove(_world);
 
-    public Direction2 Direction
+    public void Die()
     {
-        get
+        Segment previous = _tail;
+        Segment next = _tail;
+        for (int i = 0; i < _eatenFood.Count; i++)
+            _world.RemooveFood(_eatenFood[i].Item1);
+        for (int i = 0; i < Length; i++)
         {
-            if (_direction.x != 0)
-                if (_direction.x > 0)
-                    return Direction2.Right;
-                else
-                    return Direction2.Left;
-            if (_direction.y > 0)
-                return Direction2.Up;
-            return Direction2.Down;
+            next = previous.Previous;
+            previous.Die(_world);
+            previous = next;
         }
-        set
-        {
-            switch (value)
+    }
+
+    public void AddEatenFood(Vector2Int pos)
+    {
+        GameObject food = _world.Food(pos);
+        food.GetComponent<Renderer>().material = _material;
+        _eatenFood.Add((pos, food));
+    }
+
+    public void Step(float speed)
+    {
+        bool growth = false;
+        Segment s;
+        if (_eatenFood.Count > 0)
+            if (_tail.Pos == _eatenFood[0].Item1)//growth
             {
-                case Direction2.Up:
-                    (_direction.x, _direction.y) = (0, 1);
-                    break;
-                case Direction2.Down:
-                    (_direction.x, _direction.y) = (0, -1);
-                    break;
-                case Direction2.Right:
-                    (_direction.x, _direction.y) = (1, 0);
-                    break;
-                case Direction2.Left:
-                    (_direction.x, _direction.y) = (-1, 0);
-                    break;
-                default:
-                    throw new System.Exception();
+                growth = true;
+                _world.RemooveFood(_eatenFood[0].Item1);
+                Segment newTail = _tail.CreateNext(BodyPrefab, _world, _tail.Pos, _material);
+                _tail = newTail;
+                s = _tail.Previous;
+                _eatenFood.RemoveAt(0);
             }
-        }
-    }
-    public void Step(out Vector2Int head, out Vector2Int? leaveOrNull)
-    {
-        leaveOrNull = _body[_tail];
-        _body[_tail] = _head;
-        if (_direction == -_lastDirection)
-            _direction = _lastDirection;
-        _head += _direction;
-        _lastDirection = _direction;
-        head = _head;
-        _tail++;
-        _tail %= _body.Count;
-    }
-    public void GrowthStep(out Vector2Int head, out Vector2Int? leaveOrNull)
-    {
-        List<Vector2Int> newBody = new List<Vector2Int> { _head };
-        for (int i = 0; i < _body.Count; i++)
+            else
+            {
+                s = _tail;
+            }
+        else
+            s = _tail;
+        for (int i = 0; i < Length; i++)//moove
         {
-            newBody.Add(_body[(_tail + i) % _body.Count]);
+            if (i == 0)
+                s.Moove(speed, _world, true);
+            else
+                s.Moove(speed, _world);
+            s = s.Previous;
         }
-        if (_direction == -_lastDirection)
-            _direction = _lastDirection;
-        _head += _direction;
-        _lastDirection = _direction;
-        (head, leaveOrNull) = (_head, null);
-        _tail = 1;
-        _body = newBody;
+        if (growth)
+            Length++;
     }
 
-    public Snake(Vector2Int[] points, int ID, List<int> targetIDs, Direction2 direction)
+    public Snake(World world, int playerId, Vector2Int[] pos, GameObject[] gameObjects, int ID,
+        Direction2 direction, GameObject bodyPrefab, Material bodyMaterial, Material headMaterial)
     {
+        PlayerId = playerId;
+        _eatenFood = new List<(Vector2Int, GameObject)>();
+        BodyPrefab = bodyPrefab;
+        _material = bodyMaterial;
+        _world = world;
         this.ID = ID;
-        TargetIDs = targetIDs.ToList();
-        _head = points[0];
-        _body = new List<Vector2Int>();
-        for (int i = 1; i < points.Length; i++)
-            _body.Add(points[i]);
-        _direction = new();
-        Direction = direction;
-        _lastDirection = _direction;
+        _head = gameObjects[0].GetComponent<Head>();
+        _head.Init(world, ID, pos[0], direction, headMaterial);
+        world.Map.Set(pos[0], ID, TileStatus.Head);
+        Segment previous = _head;
+        for (int i = 1; i < pos.Length; i++)
+        {
+            world.Map.Set(pos[i], ID, TileStatus.Body);
+            previous.Next = gameObjects[i].GetComponent<Segment>();
+            previous.Next.Init(world, ID, pos[i], bodyMaterial, previous);
+            previous = previous.Next;
+        }
+        _tail = previous;
+        Length = pos.Length;
+        TurnTimer = 0;
     }
 }

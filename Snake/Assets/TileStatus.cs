@@ -5,5 +5,4 @@
     Body,
     Head,
     Wall
-    
 }
